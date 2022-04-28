@@ -1,23 +1,26 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { login, error } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const { user, login, error } = useContext(UserContext);
 
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
       await login(email, password);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
-    <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
+    <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-auto'>
       <form onSubmit={loginHandler}>
         <div className='card-body'>
           {/* Email field */}
@@ -48,11 +51,11 @@ function Login() {
               required
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label className='label'>
+            {/* <label className='label'>
               <a href='/' className='label-text-alt link link-hover'>
                 Forgot password?
               </a>
-            </label>
+            </label> */}
           </div>
 
           {error && <p className=' text-red-400'>{error}</p>}

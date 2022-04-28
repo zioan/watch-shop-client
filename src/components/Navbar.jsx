@@ -7,29 +7,47 @@ import AuthContext from '../context/AuthContext';
 import UserContext from '../context/UserContext';
 
 function Navbar() {
-  const [togglerNav, setTogglerNav] = useState(false);
+  const [togglerResponsiveNav, setTogglerResponsiveNav] = useState(false);
+  const [userDropdown, setUserDropdown] = useState(false);
   const { user } = useContext(AuthContext);
   const { logoutUser } = useContext(UserContext);
 
+  const navigate = useNavigate();
+
   const hamburgerHandler = () => {
-    setTogglerNav(!togglerNav);
+    setTogglerResponsiveNav(!togglerResponsiveNav);
+  };
+
+  // If no user, hide user dropdown and navigate to login page
+  const checkUser = () => {
+    if (!user) {
+      setUserDropdown(false);
+      navigate('/auth');
+    } else {
+      setUserDropdown(true);
+    }
   };
 
   const logoutHandler = () => {
+    setUserDropdown(false);
     logoutUser();
   };
 
   return (
     <div className=' h-auto md:h-24 p-2 shadow-lg  '>
       <nav className='navbar container mx-auto flex justify-between md:items-center'>
+        {/* Logo */}
         <Link to='/' className=' flex items-center gap-2 self-start'>
           <AiOutlineFieldTime className=' text-4xl inline' />
           <p className='inline text-2xl'>Watch Store</p>
         </Link>
 
+        {/* Nav links */}
         <div
           className={
-            togglerNav ? 'flex flex-col gap-4 md:inline' : 'hidden md:inline'
+            togglerResponsiveNav
+              ? 'flex flex-col gap-4 md:inline'
+              : 'hidden md:inline'
           }
         >
           <NavLink className=' btn btn-ghost mx-2' to='/'>
@@ -43,6 +61,7 @@ function Navbar() {
           </NavLink>
         </div>
 
+        {/* Cart */}
         <div className='self-start'>
           <div className='dropdown dropdown-end'>
             <label tabIndex='0' className='btn btn-ghost btn-circle'>
@@ -80,8 +99,26 @@ function Navbar() {
             </div>
           </div>
 
+          {/* User */}
           <div className='dropdown dropdown-end'>
-            <label tabIndex='0' className='btn btn-ghost btn-circle avatar'>
+            {user ? (
+              <button className=' btn btn-ghost' onClick={checkUser}>
+                {user.name}
+              </button>
+            ) : (
+              <button
+                className=' btn btn-ghost rounded-full'
+                onClick={checkUser}
+              >
+                <FaRegUser className='mx-auto text-xl ' />
+              </button>
+            )}
+            {/* <label
+              tabIndex='0'
+              className='btn btn-ghost btn-circle min-w-[48px] w-auto avatar'
+              // onClick check if user.
+              onClick={checkUser}
+            >
               <div className='w-10 rounded-full'>
                 {user ? (
                   <p className=' mt-3 mx-auto'>{user.name}</p>
@@ -89,21 +126,25 @@ function Navbar() {
                   <FaRegUser className='mx-auto text-xl mt-[10px]' />
                 )}
               </div>
-            </label>
-            <ul
-              tabIndex='0'
-              className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-28'
-            >
-              <li>
-                <button className='justify-between'>
-                  Profile
-                  {/* <span className='badge'>New</span> */}
-                </button>
-              </li>
-              <li>
-                <button onClick={logoutHandler}>Logout</button>
-              </li>
-            </ul>
+            </label> */}
+
+            {/* If user is logged in, display user dropdown */}
+            {userDropdown && (
+              <ul
+                tabIndex='0'
+                className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-28'
+              >
+                <li>
+                  <button className='justify-between'>
+                    Profile
+                    {/* <span className='badge'>New</span> */}
+                  </button>
+                </li>
+                <li>
+                  <button onClick={logoutHandler}>Logout</button>
+                </li>
+              </ul>
+            )}
           </div>
 
           <label
@@ -111,7 +152,7 @@ function Navbar() {
             className='btn btn-ghost btn-circle  inline md:hidden'
             onClick={hamburgerHandler}
           >
-            {togglerNav ? (
+            {togglerResponsiveNav ? (
               <p className='mx-auto text-2xl font-bold  mt-[6px]'>X</p>
             ) : (
               <FaBars className='mx-auto text-xl mt-[14px]' />
