@@ -132,7 +132,7 @@ function Navbar() {
             {userDropdown && (
               <ul
                 tabIndex='0'
-                className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-28'
+                className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-32'
               >
                 <li>
                   <button className='justify-between'>
@@ -140,6 +140,11 @@ function Navbar() {
                     {/* <span className='badge'>New</span> */}
                   </button>
                 </li>
+                {user.admin === 1 && (
+                  <li>
+                    <Link to='/admin'>Admin Panel</Link>
+                  </li>
+                )}
                 <li>
                   <button onClick={logoutHandler}>Logout</button>
                 </li>

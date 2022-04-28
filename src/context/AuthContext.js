@@ -10,6 +10,7 @@ function AuthProvider(props) {
   async function getUser() {
     const userRes = await axios.get(`${server}/users/loggedin`);
     setUser(userRes.data);
+    // console.log(userRes.data);
   }
 
   useEffect(() => {

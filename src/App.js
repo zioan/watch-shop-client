@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Auth from './pages/Auth';
+import Admin from './pages/Admin';
 
 axios.defaults.withCredentials = true;
 
@@ -16,7 +17,8 @@ function App() {
         <main className=' container mx-auto px-3 pb-12 relative'>
           <Routes>
             <Route exact path='/' element={<Home />} />
-            <Route exact path='/auth' element={<Auth />} />
+            <Route path='/auth' element={<Auth />} />
+            <Route path='/admin' element={<Admin />} />
           </Routes>
         </main>
         <Footer />

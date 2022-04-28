@@ -7,7 +7,6 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [error, setError] = useState('');
-
   const { getUser } = useContext(AuthContext);
 
   const login = async (email, password) => {
@@ -58,6 +57,7 @@ export const UserProvider = ({ children }) => {
       await axios.post(`${server}/users/logout`);
       getUser();
       setError('');
+      window.location.replace('/');
     } catch (error) {
       console.log(error);
     }
