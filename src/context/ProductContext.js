@@ -7,16 +7,34 @@ const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [images, setImages] = useState([]);
   const [error, setError] = useState('');
   const { user } = useContext(AuthContext);
 
   const getProducts = async () => {
+    getImages();
     try {
       const productRes = await axios.get(`${server}/products/all`);
       setProducts(productRes.data);
       setError('');
     } catch (error) {
       setError(error.response.data);
+    }
+  };
+
+  const uploadImage = async (formData) => {
+    const res = await axios.post(`${server}/products/upload`, formData);
+    console.log(res);
+  };
+
+  const getImages = async () => {
+    setImages([]);
+    try {
+      const imagesData = await axios.get(`${server}/files`);
+      setImages(imagesData.data);
+      // console.log(imagesData.data);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -42,7 +60,7 @@ export const ProductProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider
-      value={{ products, getProducts, createProduct, error }}
+      value={{ products, getProducts, createProduct, uploadImage, error }}
     >
       {children}
     </ProductContext.Provider>
