@@ -1,17 +1,20 @@
+import axios from 'axios';
 import { useContext, useState } from 'react';
 import ProductContext from '../../context/ProductContext';
+import server from '../../util/server';
 
 function NewProductTemplate() {
   const [name, setName] = useState('');
-  const [image, setImage] = useState();
-  const [imageName, setImageName] = useState('');
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0.0);
   const [quantity, setQuantity] = useState(0);
 
+  const [imageUploaded, setImageUploaded] = useState(false);
   const [error, setError] = useState('');
 
-  const { createProduct, uploadImage } = useContext(ProductContext);
+  const { createProduct } = useContext(ProductContext);
 
   const newProductHandler = (e) => {
     e.preventDefault();
@@ -21,7 +24,7 @@ function NewProductTemplate() {
       return;
     }
 
-    if (!imageName) {
+    if (!fileName) {
       setError('You need to upload the image first');
       return;
     }
@@ -38,28 +41,35 @@ function NewProductTemplate() {
 
     setError('');
 
-    createProduct(name, imageName, description, price, quantity);
+    createProduct(name, fileName, description, price, quantity);
 
     setName('');
-    setImageName('');
+    setFile(null);
+    setFileName('');
     setDescription('');
     setPrice(0.0);
     setQuantity(0);
+    setImageUploaded(false);
   };
 
   const saveFile = (e) => {
     e.preventDefault();
-    setImage(e.target.files[0]);
-    setImageName(e.target.files[0].name);
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
   };
 
   const uploadFile = async (e) => {
-    e.preventDefault();
     const formData = new FormData();
-    formData.append('image', image);
-    formData.append('imageName', imageName);
-
-    uploadImage(formData);
+    formData.append('file', file);
+    formData.append('fileName', fileName);
+    try {
+      const res = await axios.post(`${server}/images/upload`, formData);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+    setImageUploaded(true);
   };
 
   return (
@@ -72,13 +82,12 @@ function NewProductTemplate() {
       </label>
       <input
         type='file'
-        placeholder='Product image'
-        required
-        id='image'
         onChange={saveFile}
         className='input input-bordered w-full max-w-xs'
       />
-      <button onClick={uploadFile}>Upload</button>
+      <button className='btn' onClick={uploadFile}>
+        Upload
+      </button>
 
       <form onSubmit={newProductHandler}>
         {/* Product name */}
@@ -139,8 +148,12 @@ function NewProductTemplate() {
 
         {error && <p className=' my-2 text-red-500'>{error}</p>}
 
-        <button type='submit' className=' btn'>
-          Add product
+        {/* Enable submit button if the image is successfully uploaded */}
+        <button
+          type='submit'
+          className={imageUploaded ? 'btn' : ' btn btn-disabled'}
+        >
+          {imageUploaded ? 'Add product' : 'No image uploaded'}
         </button>
       </form>
     </>
