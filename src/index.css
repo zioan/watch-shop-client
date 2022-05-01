@@ -14,3 +14,7 @@ body {
 .active {
   @apply bg-base-200 text-primary-content border-base-200;
 }
+
+.active-tab {
+  @apply bg-red-500 text-white;
+}

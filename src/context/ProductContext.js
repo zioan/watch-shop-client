@@ -27,16 +27,18 @@ export const ProductProvider = ({ children }) => {
   //   console.log(res);
   // };
 
-  // const getImages = async () => {
-  //   setImages([]);
-  //   try {
-  //     const imagesData = await axios.get(`${server}/files`);
-  //     setImages(imagesData.data);
-  //     // console.log(imagesData.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const getImages = async () => {
+    setImages([]);
+    try {
+      const imagesData = await axios.get(`${server}/files`);
+      setImages(imagesData.data);
+      console.log(imagesData.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // getImages();
 
   const createProduct = async (name, image, description, price, quantity) => {
     const productData = {

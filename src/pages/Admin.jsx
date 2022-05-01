@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NewProductTemplate from '../components/admin/NewProductTemplate';
+import TabDashboard from '../components/admin/TabDashboard';
 import AuthContext from '../context/AuthContext';
 import ProductContext from '../context/ProductContext';
 
@@ -20,7 +20,7 @@ function Admin() {
 
   return (
     <>
-      <NewProductTemplate />
+      <TabDashboard />
     </>
   );
 }

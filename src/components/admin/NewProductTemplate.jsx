@@ -83,7 +83,7 @@ function NewProductTemplate() {
       <input
         type='file'
         onChange={saveFile}
-        className='input input-bordered w-full max-w-xs'
+        // className='input input-bordered w-full max-w-xs'
       />
       <button className='btn' onClick={uploadFile}>
         Upload
