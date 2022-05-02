@@ -25,13 +25,9 @@ function NewImage({ setImageNameHandler }) {
   return (
     <>
       <label htmlFor='image' className='block mt-2'>
-        Product image
+        Upload new image
       </label>
-      <input
-        type='file'
-        onChange={saveFile}
-        // className='input input-bordered w-full max-w-xs'
-      />
+      <input type='file' onChange={saveFile} className='my-2' />
       <button className='btn' onClick={uploadFile}>
         Upload
       </button>

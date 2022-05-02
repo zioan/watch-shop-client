@@ -6,7 +6,7 @@ function Card({ product }) {
   const [imageOverlay, setimageOverlay] = useState(false);
 
   return (
-    <div className=' relative'>
+    <div className=' relative mx-2 md:m-0'>
       <div className='relative overflow-hidden shadow-md rounded-md h-full '>
         <img
           // width='100%'

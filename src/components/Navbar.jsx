@@ -35,7 +35,7 @@ function Navbar() {
 
   return (
     <div className=' h-auto md:h-24 p-2 shadow-lg  '>
-      <nav className='navbar container mx-auto flex justify-between md:items-center'>
+      <nav className='navbar container mx-auto flex flex-col md:flex-row justify-between md:items-center'>
         {/* Logo */}
         <Link to='/' className=' flex items-center gap-2 self-start'>
           <AiOutlineFieldTime className=' text-4xl inline' />
@@ -50,19 +50,31 @@ function Navbar() {
               : 'hidden md:inline'
           }
         >
-          <NavLink className=' btn btn-ghost mx-2' to='/'>
+          <NavLink
+            className=' btn btn-ghost mx-2'
+            to='/'
+            onClick={hamburgerHandler}
+          >
             Home
           </NavLink>
-          <NavLink className=' btn btn-ghost mx-2' to='/about'>
+          <NavLink
+            className=' btn btn-ghost mx-2'
+            to='/about'
+            onClick={hamburgerHandler}
+          >
             About
           </NavLink>
-          <NavLink className=' btn btn-ghost mx-2' to='/contact'>
+          <NavLink
+            className=' btn btn-ghost mx-2'
+            to='/contact'
+            onClick={hamburgerHandler}
+          >
             Contact
           </NavLink>
         </div>
 
         {/* Cart */}
-        <div className='self-start'>
+        <div className='self-end'>
           <div className='dropdown dropdown-end'>
             <label tabIndex='0' className='btn btn-ghost btn-circle'>
               <div className='indicator'>

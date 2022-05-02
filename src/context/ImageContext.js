@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import server from '../util/server';
 
@@ -10,6 +10,10 @@ const ImageContext = createContext();
 export const ImageProvider = ({ children }) => {
   const [images, setImages] = useState([]);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    getImages();
+  }, []);
 
   // Get images (object-names) from DB
   const getImages = async () => {

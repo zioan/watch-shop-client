@@ -23,12 +23,12 @@ function Media() {
 
   return (
     <>
-      <h2 className=' text-2xl mb-6'>Media gallery</h2>
+      <h2 className=' mt-4 mb-6 text-2xl text-center font-bold'>
+        Media gallery
+      </h2>
       <p className='mb-2 text-2xl'>Upload new image.</p>
       <NewImage />
-      <p className='mb-2 mt-4 pt-2 text-2xl border-t-2 border-base-200'>
-        Click an image to remove.
-      </p>
+      <div className='divider text-xl my-6'>Click an image to delete</div>
       <p className='mb-2 text-2xl text-red-600'>
         Removing necessary files may broke the application!
       </p>

@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react';
+import ImageContext from '../../context/ImageContext';
 import ProductContext from '../../context/ProductContext';
+import server from '../../util/server';
 import NewImage from './NewImage';
 
 function NewProductTemplate() {
@@ -13,6 +15,7 @@ function NewProductTemplate() {
   const [error, setError] = useState('');
 
   const { createProduct } = useContext(ProductContext);
+  const { images } = useContext(ImageContext);
 
   const newProductHandler = (e) => {
     e.preventDefault();
@@ -54,12 +57,50 @@ function NewProductTemplate() {
     setImageUploaded(true);
   };
 
+  const selectImageHandler = (fileName) => {
+    setFileName(fileName);
+    setImageUploaded(true);
+  };
+
   return (
     <>
-      <h2 className=' my-4'>Add new product</h2>
+      <h2 className=' mt-4 mb-6 text-2xl text-center font-bold'>
+        Add new product
+      </h2>
+      {/* Upload new image */}
       <NewImage setImageNameHandler={setImageNameHandler} />
 
+      <div className='divider text-xl my-6'>OR select from gallery</div>
+
+      {/* Select existing image */}
+      <div className='flex flex-wrap gap-2 mb-6'>
+        {images.map((image) => {
+          return (
+            <img
+              key={image.id}
+              className=' object-cover w-28 h-28  cursor-pointer '
+              src={`${server}/files/${image.name}`}
+              alt={image.image}
+              onClick={() => selectImageHandler(image.name)}
+            />
+          );
+        })}
+      </div>
+
+      {/* New product form */}
       <form onSubmit={newProductHandler}>
+        {/* Product image */}
+        <label className='block mt-2'>Upload or select an image first</label>
+        <input
+          type='text'
+          placeholder='Product image'
+          required
+          readOnly
+          disabled
+          value={fileName}
+          className='input input-bordered w-full max-w-xs'
+        />
+
         {/* Product name */}
         <label htmlFor='title' className='block mt-2'>
           Product title
@@ -121,9 +162,11 @@ function NewProductTemplate() {
         {/* Enable submit button if the image is successfully uploaded */}
         <button
           type='submit'
-          className={imageUploaded ? 'btn' : ' btn btn-disabled'}
+          className={
+            imageUploaded ? 'btn block mt-4' : ' btn btn-disabled block mt-4'
+          }
         >
-          {imageUploaded ? 'Add product' : 'No image uploaded'}
+          {imageUploaded ? 'Add product' : 'Select / upload and image'}
         </button>
       </form>
     </>

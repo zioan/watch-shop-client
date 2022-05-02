@@ -38,9 +38,22 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const updateProduct = async (
+    id,
+    name,
+    image,
+    description,
+    price,
+    quantity
+  ) => {
+    const updatedData = { name, image, description, price, quantity };
+    await axios.put(`${server}/products/update/${id}`, updatedData);
+    getProducts();
+  };
+
   return (
     <ProductContext.Provider
-      value={{ products, getProducts, createProduct, error }}
+      value={{ products, getProducts, createProduct, updateProduct, error }}
     >
       {children}
     </ProductContext.Provider>
