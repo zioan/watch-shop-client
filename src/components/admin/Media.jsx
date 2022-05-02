@@ -1,17 +1,22 @@
-import axios from 'axios';
-import { useContext } from 'react';
-import ProductContext from '../../context/ProductContext';
+import { useContext, useEffect } from 'react';
+import ImageContext from '../../context/ImageContext';
 import server from '../../util/server';
 
 function Media() {
-  const { products, getProducts } = useContext(ProductContext);
+  const { images, getImages, deleteImageFromDB, deleteImageFile } =
+    useContext(ImageContext);
 
-  const deleteHandler = (imageName) => {
+  useEffect(() => {
+    getImages();
+  }, []);
+
+  const deleteHandler = (imageName, id) => {
     if (window.confirm('Are you sure you want to delete selected image?')) {
-      axios
-        .delete(`${server}/images/delete/${imageName}`)
-        .then(getProducts())
-        .catch((err) => console.log(err));
+      // Delete image from static folder
+      deleteImageFile(imageName);
+      // Delete image form DB
+      deleteImageFromDB(id);
+      getImages();
     }
   };
 
@@ -20,14 +25,14 @@ function Media() {
       <h2 className=' text-xl mb-6'>Product Images</h2>
       <p className='mb-2'>Click an image to remove</p>
       <div className=' flex flex-wrap gap-2'>
-        {products.map((product) => {
+        {images.map((image) => {
           return (
             <img
-              key={product.id}
+              key={image.id}
               className=' object-cover w-28 h-28  cursor-pointer '
-              src={`${server}/files/${product.image}`}
-              alt={product.image}
-              onClick={() => deleteHandler(product.image)}
+              src={`${server}/files/${image.name}`}
+              alt={image.image}
+              onClick={() => deleteHandler(image.name, image.id)}
             />
           );
         })}

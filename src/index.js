@@ -5,6 +5,7 @@ import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { UserProvider } from './context/UserContext';
 import { ProductProvider } from './context/ProductContext';
+import { ImageProvider } from './context/ImageContext';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -15,7 +16,9 @@ root.render(
     <AuthProvider>
       <UserProvider>
         <ProductProvider>
-          <App />
+          <ImageProvider>
+            <App />
+          </ImageProvider>
         </ProductProvider>
       </UserProvider>
     </AuthProvider>

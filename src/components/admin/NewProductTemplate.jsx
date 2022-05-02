@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useContext, useState } from 'react';
+import ImageContext from '../../context/ImageContext';
 import ProductContext from '../../context/ProductContext';
 import server from '../../util/server';
 
@@ -15,6 +16,7 @@ function NewProductTemplate() {
   const [error, setError] = useState('');
 
   const { createProduct } = useContext(ProductContext);
+  const { uploadImage, createImageInDB } = useContext(ImageContext);
 
   const newProductHandler = (e) => {
     e.preventDefault();
@@ -62,13 +64,16 @@ function NewProductTemplate() {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('fileName', fileName);
-    try {
-      const res = await axios.post(`${server}/images/upload`, formData);
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-      return;
-    }
+    createImageInDB(fileName);
+    uploadImage(formData);
+
+    // try {
+    //   const res = await axios.post(`${server}/images/upload`, formData);
+    //   console.log(res.data);
+    // } catch (error) {
+    //   console.log(error);
+    //   return;
+    // }
     setImageUploaded(true);
   };
 
