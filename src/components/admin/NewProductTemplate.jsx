@@ -1,12 +1,9 @@
-import axios from 'axios';
 import { useContext, useState } from 'react';
-import ImageContext from '../../context/ImageContext';
 import ProductContext from '../../context/ProductContext';
-import server from '../../util/server';
+import NewImage from './NewImage';
 
 function NewProductTemplate() {
   const [name, setName] = useState('');
-  const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0.0);
@@ -16,7 +13,6 @@ function NewProductTemplate() {
   const [error, setError] = useState('');
 
   const { createProduct } = useContext(ProductContext);
-  const { uploadImage, createImageInDB } = useContext(ImageContext);
 
   const newProductHandler = (e) => {
     e.preventDefault();
@@ -46,7 +42,6 @@ function NewProductTemplate() {
     createProduct(name, fileName, description, price, quantity);
 
     setName('');
-    setFile(null);
     setFileName('');
     setDescription('');
     setPrice(0.0);
@@ -54,45 +49,15 @@ function NewProductTemplate() {
     setImageUploaded(false);
   };
 
-  const saveFile = (e) => {
-    e.preventDefault();
-    setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
-  };
-
-  const uploadFile = async (e) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('fileName', fileName);
-    createImageInDB(fileName);
-    uploadImage(formData);
-
-    // try {
-    //   const res = await axios.post(`${server}/images/upload`, formData);
-    //   console.log(res.data);
-    // } catch (error) {
-    //   console.log(error);
-    //   return;
-    // }
+  const setImageNameHandler = (fileName) => {
+    setFileName(fileName);
     setImageUploaded(true);
   };
 
   return (
     <>
       <h2 className=' my-4'>Add new product</h2>
-
-      {/* Product image */}
-      <label htmlFor='image' className='block mt-2'>
-        Product image
-      </label>
-      <input
-        type='file'
-        onChange={saveFile}
-        // className='input input-bordered w-full max-w-xs'
-      />
-      <button className='btn' onClick={uploadFile}>
-        Upload
-      </button>
+      <NewImage setImageNameHandler={setImageNameHandler} />
 
       <form onSubmit={newProductHandler}>
         {/* Product name */}
