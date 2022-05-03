@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Auth from './pages/Auth';
 import Admin from './pages/Admin';
 import Contact from './pages/Contact';
+import UserProfile from './pages/UserProfile';
 
 axios.defaults.withCredentials = true;
 
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route exact path='/' element={<Home />} />
             <Route path='/auth' element={<Auth />} />
+            <Route path='/profile' element={<UserProfile />} />
             <Route path='/admin' element={<Admin />} />
             <Route path='/contact' element={<Contact />} />
           </Routes>

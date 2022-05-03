@@ -7,7 +7,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [error, setError] = useState('');
-  const { getUser } = useContext(AuthContext);
+  const { user, getUser } = useContext(AuthContext);
 
   const login = async (email, password) => {
     const loginDetails = {
@@ -52,6 +52,43 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const updateUserProfile = async (name, surname, address) => {
+    const userData = { name, surname, address };
+    try {
+      await axios.put(`${server}/users/update/${user.id}`, userData);
+      logoutUser();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateUserEmail = async (email) => {
+    const userData = { email };
+    try {
+      await axios.put(`${server}/users/update/email/${user.id}`, userData);
+      logoutUser();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateUserPassword = async (currentPassword, newPassword) => {
+    const userData = {
+      email: user.email,
+      password: currentPassword,
+      newPassword: newPassword,
+    };
+    try {
+      await axios.put(`${server}/users/update/password/${user.id}`, userData);
+    } catch (error) {
+      console.log(error);
+      setError('Your current password is incorrect');
+      return;
+    }
+    setError('');
+    logoutUser();
+  };
+
   const logoutUser = async () => {
     try {
       await axios.post(`${server}/users/logout`);
@@ -64,7 +101,17 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ login, logoutUser, registerUser, error }}>
+    <UserContext.Provider
+      value={{
+        login,
+        logoutUser,
+        registerUser,
+        updateUserProfile,
+        updateUserEmail,
+        updateUserPassword,
+        error,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

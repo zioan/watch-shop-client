@@ -125,20 +125,6 @@ function Navbar() {
                 <FaRegUser className='mx-auto text-xl ' />
               </button>
             )}
-            {/* <label
-              tabIndex='0'
-              className='btn btn-ghost btn-circle min-w-[48px] w-auto avatar'
-              // onClick check if user.
-              onClick={checkUser}
-            >
-              <div className='w-10 rounded-full'>
-                {user ? (
-                  <p className=' mt-3 mx-auto'>{user.name}</p>
-                ) : (
-                  <FaRegUser className='mx-auto text-xl mt-[10px]' />
-                )}
-              </div>
-            </label> */}
 
             {/* If user is logged in, display user dropdown */}
             {userDropdown && (
@@ -147,10 +133,7 @@ function Navbar() {
                 className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-32'
               >
                 <li>
-                  <button className='justify-between'>
-                    Profile
-                    {/* <span className='badge'>New</span> */}
-                  </button>
+                  <Link to='/profile'>Profile</Link>
                 </li>
                 {user.admin === 1 && (
                   <li>
