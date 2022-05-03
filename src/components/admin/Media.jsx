@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import ImageContext from '../../context/ImageContext';
 import server from '../../util/server';
+import MediaGalley from './MediaGalley';
 import NewImage from './NewImage';
 
 function Media() {
@@ -11,7 +12,7 @@ function Media() {
     getImages();
   }, []);
 
-  const deleteHandler = (imageName, id) => {
+  const clickHandler = (imageName, id) => {
     if (window.confirm('Are you sure you want to delete selected image?')) {
       // Delete image from static folder
       deleteImageFile(imageName);
@@ -32,19 +33,7 @@ function Media() {
       <p className='mb-2 text-2xl text-red-600'>
         Removing necessary files may broke the application!
       </p>
-      <div className=' flex flex-wrap gap-2'>
-        {images.map((image) => {
-          return (
-            <img
-              key={image.id}
-              className=' object-cover w-28 h-28  cursor-pointer '
-              src={`${server}/files/${image.name}`}
-              alt={image.image}
-              onClick={() => deleteHandler(image.name, image.id)}
-            />
-          );
-        })}
-      </div>
+      <MediaGalley clickHandler={clickHandler} />
     </>
   );
 }

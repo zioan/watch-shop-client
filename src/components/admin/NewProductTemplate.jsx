@@ -3,6 +3,7 @@ import ImageContext from '../../context/ImageContext';
 import ProductContext from '../../context/ProductContext';
 import server from '../../util/server';
 import NewImage from './NewImage';
+import MediaGalley from './MediaGalley';
 
 function NewProductTemplate() {
   const [name, setName] = useState('');
@@ -11,6 +12,7 @@ function NewProductTemplate() {
   const [price, setPrice] = useState(0.0);
   const [quantity, setQuantity] = useState(0);
 
+  const [showGallery, setShowGallery] = useState(false);
   const [imageUploaded, setImageUploaded] = useState(false);
   const [error, setError] = useState('');
 
@@ -57,9 +59,10 @@ function NewProductTemplate() {
     setImageUploaded(true);
   };
 
-  const selectImageHandler = (fileName) => {
+  const clickHandler = (fileName) => {
     setFileName(fileName);
     setImageUploaded(true);
+    setShowGallery(false);
   };
 
   return (
@@ -68,24 +71,20 @@ function NewProductTemplate() {
         Add new product
       </h2>
       {/* Upload new image */}
-      <NewImage setImageNameHandler={setImageNameHandler} />
+      <div className='flex justify-center items-center'>
+        <NewImage setImageNameHandler={setImageNameHandler} />
+      </div>
 
       <div className='divider text-xl my-6'>OR select from gallery</div>
 
       {/* Select existing image */}
-      <div className='flex flex-wrap gap-2 mb-6'>
-        {images.map((image) => {
-          return (
-            <img
-              key={image.id}
-              className=' object-cover w-28 h-28  cursor-pointer '
-              src={`${server}/files/${image.name}`}
-              alt={image.image}
-              onClick={() => selectImageHandler(image.name)}
-            />
-          );
-        })}
-      </div>
+      <button
+        className='btn mb-6 block mx-auto'
+        onClick={() => setShowGallery(!showGallery)}
+      >
+        Show Gallery
+      </button>
+      {showGallery && <MediaGalley clickHandler={clickHandler} />}
 
       {/* New product form */}
       <form onSubmit={newProductHandler}>

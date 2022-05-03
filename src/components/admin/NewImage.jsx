@@ -24,10 +24,12 @@ function NewImage({ setImageNameHandler }) {
   };
   return (
     <>
-      <label htmlFor='image' className='block mt-2'>
-        Upload new image
-      </label>
-      <input type='file' onChange={saveFile} className='my-2' />
+      <div>
+        <label htmlFor='image' className='block mt-2'>
+          Upload new image
+        </label>
+        <input type='file' onChange={saveFile} className='my-2' />
+      </div>
       <button className='btn' onClick={uploadFile}>
         Upload
       </button>
