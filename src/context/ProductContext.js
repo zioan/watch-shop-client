@@ -6,13 +6,37 @@ const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [singleProduct, setSingleProduct] = useState(null);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const getProducts = async () => {
     try {
+      setLoading(true);
       const productRes = await axios.get(`${server}/products/all`);
       setProducts(productRes.data);
+      setLoading(false);
       setError('');
+    } catch (error) {
+      setError(error.response.data);
+    }
+  };
+
+  const getSingleProduct = async (id) => {
+    try {
+      setSingleProduct(null);
+      setError('');
+      setLoading(true);
+      const singleProduct = await axios.get(`${server}/products/${id}`);
+      if (singleProduct.data.length > 0) {
+        setSingleProduct(singleProduct.data);
+        console.log(singleProduct.data[0]);
+        setLoading(false);
+      } else {
+        setSingleProduct(null);
+        setLoading(false);
+        setError('no product');
+      }
     } catch (error) {
       setError(error.response.data);
     }
@@ -53,7 +77,16 @@ export const ProductProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider
-      value={{ products, getProducts, createProduct, updateProduct, error }}
+      value={{
+        products,
+        getProducts,
+        singleProduct,
+        getSingleProduct,
+        createProduct,
+        updateProduct,
+        error,
+        loading,
+      }}
     >
       {children}
     </ProductContext.Provider>

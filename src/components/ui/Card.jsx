@@ -1,9 +1,19 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ProductContext from '../../context/ProductContext';
 
 import server from '../../util/server';
 
 function Card({ product }) {
   const [imageOverlay, setimageOverlay] = useState(false);
+  const navigate = useNavigate();
+
+  const { getSingleProduct } = useContext(ProductContext);
+
+  const redirectHandler = () => {
+    getSingleProduct(product.id);
+    navigate(`/product/${product.id}`);
+  };
 
   return (
     <div className=' relative mx-2 md:m-0'>
@@ -14,6 +24,7 @@ function Card({ product }) {
           className='relative object-cover w-full h-full  cursor-pointer hover:scale-110 transition duration-300 ease-in-out'
           src={`${server}/files/${product.image}`}
           alt={product.image}
+          onClick={redirectHandler}
         />
       </div>
 
