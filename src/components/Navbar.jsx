@@ -5,12 +5,14 @@ import { AiOutlineFieldTime } from 'react-icons/ai';
 import { FaBars } from 'react-icons/fa';
 import AuthContext from '../context/AuthContext';
 import UserContext from '../context/UserContext';
+import CartContext from '../context/CartContext';
 
 function Navbar() {
   const [togglerResponsiveNav, setTogglerResponsiveNav] = useState(false);
   const [userDropdown, setUserDropdown] = useState(false);
   const { user } = useContext(AuthContext);
   const { logoutUser } = useContext(UserContext);
+  const { cart, cartTotal } = useContext(CartContext);
 
   const navigate = useNavigate();
 
@@ -92,7 +94,9 @@ function Navbar() {
                     d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'
                   />
                 </svg>
-                <span className='badge badge-sm indicator-item'>8</span>
+                <span className='badge badge-sm indicator-item'>
+                  {cart.length}
+                </span>
               </div>
             </label>
             <div
@@ -100,12 +104,18 @@ function Navbar() {
               className='mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow'
             >
               <div className='card-body'>
-                <span className='font-bold text-lg'>8 Items</span>
-                <span className='text-info'>Subtotal: $999</span>
+                {cart.length ? (
+                  <span className='font-bold text-lg'>
+                    {cart.length} {cart.length === 1 ? 'product' : 'products'}
+                  </span>
+                ) : (
+                  <span className='font-bold text-lg'>Your cart is empty</span>
+                )}
+                <span className='text-info'>Total: &euro; {cartTotal}</span>
                 <div className='card-actions'>
-                  <button className='btn btn-primary btn-block'>
+                  <Link to='/cart' className='btn btn-primary btn-block'>
                     View cart
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

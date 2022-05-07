@@ -1,26 +1,30 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import CartContext from '../../context/CartContext';
 import ProductContext from '../../context/ProductContext';
 
 import server from '../../util/server';
 
 function Card({ product }) {
-  const [imageOverlay, setimageOverlay] = useState(false);
   const navigate = useNavigate();
 
   const { getSingleProduct } = useContext(ProductContext);
+  const { addToCart } = useContext(CartContext);
 
   const redirectHandler = () => {
     getSingleProduct(product.id);
     navigate(`/product/${product.id}`);
+    window.scrollTo({ left: 0, top: 0 });
+  };
+
+  const addToCartHandler = () => {
+    addToCart(product);
   };
 
   return (
     <div className=' relative mx-2 md:m-0'>
       <div className='relative overflow-hidden shadow-md rounded-md h-full '>
         <img
-          // width='100%'
-          // height='100%'
           className='relative object-cover w-full h-full  cursor-pointer hover:scale-110 transition duration-300 ease-in-out'
           src={`${server}/files/${product.image}`}
           alt={product.image}
@@ -39,6 +43,7 @@ function Card({ product }) {
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
+              onClick={addToCartHandler}
             >
               <path
                 strokeLinecap='round'

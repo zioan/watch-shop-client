@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import UserProfile from './pages/UserProfile';
 import Product from './pages/Product';
 import NotFound from './pages/NotFound';
+import Cart from './pages/Cart';
 
 axios.defaults.withCredentials = true;
 
@@ -20,8 +21,9 @@ function App() {
         <main className='container mx-auto grow'>
           <Routes>
             <Route exact path='/' element={<Home />} />
-            <Route path='/product/:product_id' element={<Product />} />
             <Route path='/auth' element={<Auth />} />
+            <Route path='/product/:product_id' element={<Product />} />
+            <Route path='/cart' element={<Cart />} />
             <Route path='/profile' element={<UserProfile />} />
             <Route path='/admin' element={<Admin />} />
             <Route path='/contact' element={<Contact />} />

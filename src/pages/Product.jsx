@@ -1,18 +1,31 @@
 import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Card from '../components/ui/Card';
 import Spinner from '../components/ui/Spinner';
+import CartContext from '../context/CartContext';
 import ProductContext from '../context/ProductContext';
 import server from '../util/server';
 import NotFound from './NotFound';
 
 function Product() {
-  const { singleProduct, getSingleProduct, error, loading } =
-    useContext(ProductContext);
+  const {
+    products,
+    getProducts,
+    singleProduct,
+    getSingleProduct,
+    error,
+    loading,
+  } = useContext(ProductContext);
+
+  const { addToCart } = useContext(CartContext);
 
   const params = useParams();
 
   useEffect(() => {
-    console.log(params.product_id);
+    // if page load for first time get all products for featured products
+    products.length < 1 && getProducts();
+
+    // read product id from url params and get product
     getSingleProduct(params.product_id);
   }, []);
 
@@ -20,11 +33,21 @@ function Product() {
     return <Spinner />;
   };
 
+  const addToCartHandler = () => {
+    addToCart(singleProduct[0]);
+  };
+
   // { id, name, description, image, price, quantity }
+
+  const goTop = () => {
+    window.scrollTo({ left: 0, top: 0 });
+  };
 
   return (
     <>
       {loading && loadingProduct()}
+
+      {/* if product is found */}
       {singleProduct && (
         <div className='flex flex-col md:flex-row gap-6 md:gap-10 mb-10'>
           <section>
@@ -35,16 +58,16 @@ function Product() {
             />
           </section>
           <section className=' flex-grow m-4'>
-            <h2 className='text-2xl font-bold mb-8 '>
+            <h2 className='text-2xl font-bold mb-8 mt-4 '>
               {singleProduct[0].name}
             </h2>
             <h3 className='text-xl mb-4 '>&euro; {singleProduct[0].price}</h3>
             <p className='text-xl mb-4'>{singleProduct[0].description}</p>
-            <div className='flex justify-center'>
-              <button className='btn btn-ghost text-xl'>
+            <div className='divider'>
+              <button className='btn text-lg' onClick={addToCartHandler}>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
-                  className='h-8 w-8 mr-2'
+                  className='h-6 w-6 mr-2'
                   fill='none'
                   viewBox='0 0 24 24'
                   stroke='currentColor'
@@ -62,7 +85,26 @@ function Product() {
           </section>
         </div>
       )}
+
+      {/* if no product is found display 404 component */}
       {error === 'no product' && <NotFound />}
+
+      {/* display sugested products if no error */}
+      {!error && (
+        <>
+          <div className='divider my-10'>
+            <h3 className='text-xl font-bold'>Featured Products</h3>
+          </div>
+          <section
+            className=' grid md:grid-cols-2 lg:mx-10 xl:grid-cols-4 gap-8'
+            onClick={goTop}
+          >
+            {products.slice(0, 4).map((product) => {
+              return <Card key={product.id} product={product} />;
+            })}
+          </section>
+        </>
+      )}
     </>
   );
 }
