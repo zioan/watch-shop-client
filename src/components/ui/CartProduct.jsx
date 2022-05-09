@@ -1,19 +1,34 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import server from '../../util/server';
-import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
+import { BiUpArrow, BiDownArrow, BiTrash } from 'react-icons/bi';
+import CartContext from '../../context/CartContext';
 
 function CartProduct({ product }) {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(product.ordered_quantity);
+  const {
+    updateProductQuantityAndSubtotal,
+    calculateOrderTotal,
+    calculateTotalProductsOrdered,
+    deleteProductFromCart,
+  } = useContext(CartContext);
 
-  const increaseQuantity = (stockQuantity) => {
-    if (quantity <= stockQuantity) {
+  const increaseQuantity = () => {
+    if (quantity <= product.quantity - 1) {
       setQuantity(quantity + 1);
+      product.ordered_quantity = quantity + 1;
+      updateProductQuantityAndSubtotal(product.id, product.ordered_quantity);
+      calculateOrderTotal();
+      calculateTotalProductsOrdered();
     }
   };
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
+      product.ordered_quantity = quantity - 1;
+      updateProductQuantityAndSubtotal(product.id, product.ordered_quantity);
+      calculateOrderTotal();
+      calculateTotalProductsOrdered();
     }
   };
 
@@ -36,12 +51,18 @@ function CartProduct({ product }) {
           <div className='flex items-center gap-4 border-2 p-2'>
             {quantity}
             <span className='flex flex-col'>
-              <BiUpArrow onClick={() => increaseQuantity(product.quantity)} />
+              <BiUpArrow onClick={increaseQuantity} />
               <BiDownArrow onClick={decreaseQuantity} />
             </span>
           </div>
         </div>
-        <p>Subtotal: &euro; {product.price * quantity}</p>
+        <p>Subtotal: &euro; {product.subtotal}</p>
+        <button
+          className=' text-xl'
+          onClick={() => deleteProductFromCart(product.id)}
+        >
+          <BiTrash />
+        </button>
       </div>
     </div>
   );

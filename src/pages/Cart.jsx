@@ -3,7 +3,7 @@ import CartProduct from '../components/ui/CartProduct';
 import CartContext from '../context/CartContext';
 
 function Cart() {
-  const { cart } = useContext(CartContext);
+  const { cart, cartTotal } = useContext(CartContext);
 
   console.log(cart);
 
@@ -17,7 +17,7 @@ function Cart() {
             })}
           </div>
           <div>
-            <p>total</p>
+            <p>total: {cartTotal}</p>
           </div>
         </section>
       ) : (

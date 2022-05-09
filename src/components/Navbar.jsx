@@ -12,7 +12,8 @@ function Navbar() {
   const [userDropdown, setUserDropdown] = useState(false);
   const { user } = useContext(AuthContext);
   const { logoutUser } = useContext(UserContext);
-  const { cart, cartTotal } = useContext(CartContext);
+  const { cart, cartTotal, totalNumberOfProductsInCart } =
+    useContext(CartContext);
 
   const navigate = useNavigate();
 
@@ -95,7 +96,7 @@ function Navbar() {
                   />
                 </svg>
                 <span className='badge badge-sm indicator-item'>
-                  {cart.length}
+                  {totalNumberOfProductsInCart}
                 </span>
               </div>
             </label>
@@ -106,7 +107,8 @@ function Navbar() {
               <div className='card-body'>
                 {cart.length ? (
                   <span className='font-bold text-lg'>
-                    {cart.length} {cart.length === 1 ? 'product' : 'products'}
+                    {totalNumberOfProductsInCart}{' '}
+                    {cart.length === 1 ? 'product' : 'products'}
                   </span>
                 ) : (
                   <span className='font-bold text-lg'>Your cart is empty</span>
