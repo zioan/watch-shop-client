@@ -29,7 +29,7 @@ export const ProductProvider = ({ children }) => {
       setLoading(true);
       const singleProduct = await axios.get(`${server}/products/${id}`);
       if (singleProduct.data.length > 0) {
-        setSingleProduct(singleProduct.data);
+        setSingleProduct(singleProduct.data[0]);
         console.log(singleProduct.data[0]);
         setLoading(false);
       } else {

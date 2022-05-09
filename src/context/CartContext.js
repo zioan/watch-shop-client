@@ -15,11 +15,34 @@ export const CartProvider = ({ children }) => {
     calculateTotalProductsOrdered();
   }, [cart]);
 
+  // useEffect(() => {
+  //   getCartFromLocalStorage();
+  // }, []);
+
+  // const getCartFromLocalStorage = () => {
+  //   if (localStorage.getItem('cart') === null) {
+  //     localStorage.setItem('cart', JSON.stringify(cart));
+  //     const cartLocal = JSON.parse(localStorage.getItem('cart') || '[]');
+  //     setCart(cartLocal);
+  //   } else {
+  //     const cartLocal = JSON.parse(localStorage.getItem('cart') || '[]');
+  //     setCart(cartLocal);
+  //   }
+  // };
+
   const addToCart = (product) => {
+    // duplicated item bug here!
     if (cart.includes(product)) {
+      console.log('product already in cart');
       return;
     }
+
+    // const cartData = [...cart, product];
+    // setCart(cartData);
     setCart((prevState) => [...prevState, product]);
+    // localStorage.setItem('cart', JSON.stringify(cart));
+    // const cartLocal = JSON.parse(localStorage.getItem('cart') || '[]');
+    // console.log('local: ', cartLocal);
   };
 
   const updateProductQuantityAndSubtotal = (id, quantity) => {
@@ -68,6 +91,7 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
+        // getCartFromLocalStorage,
         cart,
         addToCart,
         cartTotal,

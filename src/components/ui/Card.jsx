@@ -11,7 +11,7 @@ function Card({ product }) {
   const { getSingleProduct } = useContext(ProductContext);
   const { addToCart } = useContext(CartContext);
 
-  const redirectHandler = () => {
+  const productPageHandler = () => {
     getSingleProduct(product.id);
     navigate(`/product/${product.id}`);
     window.scrollTo({ left: 0, top: 0 });
@@ -19,6 +19,7 @@ function Card({ product }) {
 
   const addToCartHandler = () => {
     addToCart(product);
+    console.log('product from cart: ', product);
   };
 
   return (
@@ -28,7 +29,7 @@ function Card({ product }) {
           className='relative object-cover w-full h-full  cursor-pointer hover:scale-110 transition duration-300 ease-in-out'
           src={`${server}/files/${product.image}`}
           alt={product.image}
-          onClick={redirectHandler}
+          onClick={productPageHandler}
         />
       </div>
 

@@ -23,9 +23,11 @@ function Product() {
 
   useEffect(() => {
     // if page load for first time get all products for featured products
-    products.length < 1 && getProducts();
+    // products.length < 1 && getProducts();
+    // getProducts();
 
     // read product id from url params and get product
+    // console.log('params:', params.product_id);
     getSingleProduct(params.product_id);
   }, []);
 
@@ -34,7 +36,8 @@ function Product() {
   };
 
   const addToCartHandler = () => {
-    addToCart(singleProduct[0]);
+    addToCart(singleProduct);
+    console.log('product from product page:', singleProduct);
   };
 
   // { id, name, description, image, price, quantity }
@@ -53,16 +56,16 @@ function Product() {
           <section>
             <img
               className='relative object-cover w-full max-h-[600px] p-4 md:m-4 shadow-xl'
-              src={`${server}/files/${singleProduct[0].image}`}
-              alt={singleProduct[0].image}
+              src={`${server}/files/${singleProduct.image}`}
+              alt={singleProduct.image}
             />
           </section>
           <section className=' flex-grow m-4'>
             <h2 className='text-2xl font-bold mb-8 mt-4 '>
-              {singleProduct[0].name}
+              {singleProduct.name}
             </h2>
-            <h3 className='text-xl mb-4 '>&euro; {singleProduct[0].price}</h3>
-            <p className='text-xl mb-4'>{singleProduct[0].description}</p>
+            <h3 className='text-xl mb-4 '>&euro; {singleProduct.price}</h3>
+            <p className='text-xl mb-4'>{singleProduct.description}</p>
             <div className='divider'>
               <button className='btn text-lg' onClick={addToCartHandler}>
                 <svg

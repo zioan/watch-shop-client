@@ -16,13 +16,13 @@ root.render(
   <React.StrictMode>
     <AuthProvider>
       <UserProvider>
-        <ProductProvider>
-          <ImageProvider>
-            <CartProvider>
+        <CartProvider>
+          <ProductProvider>
+            <ImageProvider>
               <App />
-            </CartProvider>
-          </ImageProvider>
-        </ProductProvider>
+            </ImageProvider>
+          </ProductProvider>
+        </CartProvider>
       </UserProvider>
     </AuthProvider>
   </React.StrictMode>

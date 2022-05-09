@@ -10,10 +10,17 @@ import UserProfile from './pages/UserProfile';
 import Product from './pages/Product';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
+import { useContext, useEffect } from 'react';
+import ProductContext from './context/ProductContext';
 
 axios.defaults.withCredentials = true;
 
 function App() {
+  const { getProducts } = useContext(ProductContext);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
   return (
     <Router>
       <div className='flex flex-col gap-2 md:gap-8 min-h-screen'>

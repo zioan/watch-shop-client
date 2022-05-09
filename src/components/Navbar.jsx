@@ -108,7 +108,7 @@ function Navbar() {
                 {cart.length ? (
                   <span className='font-bold text-lg'>
                     {totalNumberOfProductsInCart}{' '}
-                    {cart.length === 1 ? 'product' : 'products'}
+                    {totalNumberOfProductsInCart === 1 ? 'product' : 'products'}
                   </span>
                 ) : (
                   <span className='font-bold text-lg'>Your cart is empty</span>
