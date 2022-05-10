@@ -1,12 +1,13 @@
 import { useContext, useState, useEffect } from 'react';
 import server from '../../util/server';
 import { FiEdit3 } from 'react-icons/fi';
+import { BiTrash } from 'react-icons/bi';
 import ProductContext from '../../context/ProductContext';
 import Modal from '../Modal';
 import toDecimal from '../../util/toDecimal';
 
 function ProductSingle({ product }) {
-  const { updateProduct } = useContext(ProductContext);
+  const { updateProduct, deleteProduct } = useContext(ProductContext);
 
   const [name, setName] = useState(product.name);
   const [description, setDescription] = useState(product.description);
@@ -43,6 +44,12 @@ function ProductSingle({ product }) {
     );
 
     setProductUpdatedMessage(true);
+  };
+
+  const deleteHandler = () => {
+    if (window.confirm(`Are you sure you wnat to delete ${product.name}?`)) {
+      deleteProduct(product.id);
+    }
   };
 
   return (
@@ -149,6 +156,9 @@ function ProductSingle({ product }) {
             )}
           </div>
         </Modal>
+        <button className='btn ' onClick={deleteHandler}>
+          <BiTrash className=' text-xl' />
+        </button>
       </div>
     </div>
   );

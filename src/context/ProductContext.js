@@ -75,6 +75,15 @@ export const ProductProvider = ({ children }) => {
     getProducts();
   };
 
+  const deleteProduct = (id) => {
+    try {
+      axios.delete(`${server}/products/delete/${id}`);
+      getProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -84,6 +93,7 @@ export const ProductProvider = ({ children }) => {
         getSingleProduct,
         createProduct,
         updateProduct,
+        deleteProduct,
         error,
         loading,
       }}
