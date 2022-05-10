@@ -22,12 +22,6 @@ function Product() {
   const params = useParams();
 
   useEffect(() => {
-    // if page load for first time get all products for featured products
-    // products.length < 1 && getProducts();
-    // getProducts();
-
-    // read product id from url params and get product
-    // console.log('params:', params.product_id);
     getSingleProduct(params.product_id);
   }, []);
 
@@ -36,11 +30,15 @@ function Product() {
   };
 
   const addToCartHandler = () => {
-    addToCart(singleProduct);
-    console.log('product from product page:', singleProduct);
+    // this fix duplicated items
+    // comparing id 'number' with params 'string' is right in this case !!!
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].id == params.product_id) {
+        console.log(products[i]);
+        addToCart(products[i]);
+      }
+    }
   };
-
-  // { id, name, description, image, price, quantity }
 
   const goTop = () => {
     window.scrollTo({ left: 0, top: 0 });
