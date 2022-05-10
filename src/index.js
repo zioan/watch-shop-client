@@ -7,6 +7,7 @@ import { UserProvider } from './context/UserContext';
 import { ProductProvider } from './context/ProductContext';
 import { ImageProvider } from './context/ImageContext';
 import { CartProvider } from './context/CartContext';
+import { OrderProvider } from './context/OrderContext';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -19,7 +20,9 @@ root.render(
         <CartProvider>
           <ProductProvider>
             <ImageProvider>
-              <App />
+              <OrderProvider>
+                <App />
+              </OrderProvider>
             </ImageProvider>
           </ProductProvider>
         </CartProvider>

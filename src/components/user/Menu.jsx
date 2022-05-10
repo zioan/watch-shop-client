@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import AuthContext from '../../context/AuthContext';
 import Credentials from './Credentials';
+import Orders from './Orders';
 import Profile from './Profile';
 
 function Menu() {
@@ -60,6 +61,8 @@ function Menu() {
         )}
         {activeComponent === 'comp1' && <Profile />}
         {activeComponent === 'comp2' && <Credentials />}
+        {/* {activeComponent === 'comp3' && < />} */}
+        {activeComponent === 'comp4' && <Orders />}
       </section>
     </>
   );

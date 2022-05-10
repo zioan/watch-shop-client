@@ -67,6 +67,10 @@ export const CartProvider = ({ children }) => {
     setCart(cart.filter((item) => item.id !== id));
   };
 
+  const emptyCartOnOrderSubmit = () => {
+    setCart([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -78,6 +82,7 @@ export const CartProvider = ({ children }) => {
         calculateTotalProductsOrdered,
         totalNumberOfProductsInCart,
         deleteProductFromCart,
+        emptyCartOnOrderSubmit,
         error,
         loading,
       }}

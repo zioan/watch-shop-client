@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import CartProduct from '../components/ui/CartProduct';
 import AuthContext from '../context/AuthContext';
 import CartContext from '../context/CartContext';
+import OrderContext from '../context/OrderContext';
 import toDecimal from '../util/toDecimal';
 
 function Cart() {
-  const { cart, cartTotal } = useContext(CartContext);
   const { user } = useContext(AuthContext);
+  const { cart, cartTotal, emptyCartOnOrderSubmit } = useContext(CartContext);
+  const { createOrder } = useContext(OrderContext);
 
   const navigate = useNavigate();
 
@@ -17,7 +19,12 @@ function Cart() {
     }
   });
 
-  const orderHandler = () => {};
+  const orderHandler = () => {
+    const orderData = JSON.stringify(cart);
+    console.log(orderData);
+    createOrder(orderData, cartTotal);
+    emptyCartOnOrderSubmit();
+  };
 
   return (
     <>
