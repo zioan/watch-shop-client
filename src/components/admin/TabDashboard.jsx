@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Media from './Media';
 import NewProductTemplate from './NewProductTemplate';
+import Orders from './Orders';
 import Products from './Products';
 
 function TabDashboard() {
@@ -12,6 +13,12 @@ function TabDashboard() {
       <div className=' flex flex-col md:flex-row border-2 border-base-200 md:min-h-[500px] m-2'>
         <div className=' md:max-w-xs md:mr-4 border-b-2 md:border-b-0 md:border-r-2 border-base-200 md:w-48'>
           <ul className='flex flex-col gap-2'>
+            <li
+              onClick={() => setActiveTab('tab5')}
+              className={activeTab === 'tab5' ? 'tab active-tab' : ' tab'}
+            >
+              Orders
+            </li>
             <li
               onClick={() => setActiveTab('tab1')}
               className={activeTab === 'tab1' ? 'tab active-tab' : ' tab'}
@@ -36,6 +43,7 @@ function TabDashboard() {
           {activeTab === 'tab1' && <Products />}
           {activeTab === 'tab2' && <NewProductTemplate />}
           {activeTab === 'tab3' && <Media />}
+          {activeTab === 'tab5' && <Orders />}
         </div>
       </div>
     </>

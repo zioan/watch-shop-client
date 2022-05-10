@@ -9,7 +9,6 @@ function Home() {
   useEffect(() => {
     if (products.length < 1) {
       getProducts();
-      console.log('home:', products);
     }
   }, []);
 

@@ -16,8 +16,6 @@ function Admin() {
     }
   }, [user]);
 
-  console.log(products);
-
   return (
     <>
       <TabDashboard />

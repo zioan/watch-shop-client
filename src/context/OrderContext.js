@@ -35,7 +35,12 @@ export const OrderProvider = ({ children }) => {
     try {
       setLoading(true);
       const orderRes = await axios.get(`${server}/orders/user/${user.id}`);
-      setUserOrders(orderRes.data);
+
+      // Newest order first
+      const sortedOrdersByDate = await orderRes.data.sort((a, b) => {
+        return new Date(b.timeStamp) - new Date(a.timeStamp);
+      });
+      setUserOrders(sortedOrdersByDate);
       setLoading(false);
       setError('');
     } catch (error) {

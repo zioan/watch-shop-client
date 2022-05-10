@@ -1,13 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import OrderContext from '../../context/OrderContext';
+import UserContext from '../../context/UserContext';
 import server from '../../util/server';
 import toDecimal from '../../util/toDecimal';
 
 function SingleOrder({ order }) {
   const [orderedItems, setOrderedItem] = useState([]);
+  const { getCustomerDetails, customerDetails } = useContext(UserContext);
+  const { updateOrderStatus } = useContext(OrderContext);
 
   useEffect(() => {
+    getCustomerDetails(order.user_id);
     setOrderedItem(JSON.parse(order.order_data));
   }, []);
+
+  const orderStatusHandler = () => {
+    updateOrderStatus(order.id, 'delivered');
+  };
 
   return (
     <>
@@ -56,6 +65,24 @@ function SingleOrder({ order }) {
           Total: &euro; {toDecimal(order.total)}
         </p>
       </div>
+      {customerDetails && (
+        <section className=' my-6'>
+          <h3>
+            Delivery to:{' '}
+            <span className='font-bold'>
+              {customerDetails.name} {customerDetails.surname}
+            </span>
+          </h3>
+          <h3>
+            Delivery Address:{' '}
+            <span className='font-bold'>{customerDetails.address}</span>
+          </h3>
+          <h3>Delivery in ca. 3 working days</h3>
+          <button className=' btn my-4' onClick={orderStatusHandler}>
+            Mark as delivered
+          </button>
+        </section>
+      )}
     </>
   );
 }
