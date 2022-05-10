@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CartContext from '../../context/CartContext';
 import ProductContext from '../../context/ProductContext';
-
 import server from '../../util/server';
+import toDecimal from '../../util/toDecimal';
 
 function Card({ product }) {
   const navigate = useNavigate();
@@ -37,7 +37,9 @@ function Card({ product }) {
         <div className=' flex justify-between'>
           <h3 className=' text-xl '>{product.name}</h3>
           <div>
-            <p className=' text-2xl inline'>&euro; {product.price}</p>
+            <p className=' text-2xl inline'>
+              &euro; {toDecimal(product.price)}
+            </p>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-6 w-6 mb-2 ml-2 inline cursor-pointer hover:scale-150 transition duration-300 ease-in-out'

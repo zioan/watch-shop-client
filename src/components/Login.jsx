@@ -1,14 +1,11 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
-
-  const { user, login, error } = useContext(UserContext);
+  const { login, error } = useContext(UserContext);
 
   const loginHandler = async (e) => {
     e.preventDefault();

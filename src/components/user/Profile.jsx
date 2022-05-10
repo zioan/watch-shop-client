@@ -6,7 +6,7 @@ import UserContext from '../../context/UserContext';
 function Profile() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const { registerUser, updateUserProfile, error } = useContext(UserContext);
+  const { updateUserProfile } = useContext(UserContext);
 
   const [updateForm, setUpdateForm] = useState(false);
 

@@ -37,7 +37,7 @@ export const CartProvider = ({ children }) => {
 
   const calculateOrderTotal = () => {
     if (cart.length === 0) {
-      return;
+      setCartTotal(0);
     } else if (cart.length === 1) {
       setCartTotal(cart[0].subtotal);
     } else {
@@ -51,7 +51,7 @@ export const CartProvider = ({ children }) => {
 
   const calculateTotalProductsOrdered = () => {
     if (cart.length === 0) {
-      return;
+      setTotalNumberOfProductsInCart(0);
     } else if (cart.length === 1) {
       setTotalNumberOfProductsInCart(cart[0].ordered_quantity);
     } else {

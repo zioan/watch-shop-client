@@ -6,16 +6,11 @@ import CartContext from '../context/CartContext';
 import ProductContext from '../context/ProductContext';
 import server from '../util/server';
 import NotFound from './NotFound';
+import toDecimal from '../util/toDecimal';
 
 function Product() {
-  const {
-    products,
-    getProducts,
-    singleProduct,
-    getSingleProduct,
-    error,
-    loading,
-  } = useContext(ProductContext);
+  const { products, singleProduct, getSingleProduct, error, loading } =
+    useContext(ProductContext);
 
   const { addToCart } = useContext(CartContext);
 
@@ -62,7 +57,9 @@ function Product() {
             <h2 className='text-2xl font-bold mb-8 mt-4 '>
               {singleProduct.name}
             </h2>
-            <h3 className='text-xl mb-4 '>&euro; {singleProduct.price}</h3>
+            <h3 className='text-xl mb-4 '>
+              &euro; {toDecimal(singleProduct.price)}
+            </h3>
             <p className='text-xl mb-4'>{singleProduct.description}</p>
             <div className='divider'>
               <button className='btn text-lg' onClick={addToCartHandler}>

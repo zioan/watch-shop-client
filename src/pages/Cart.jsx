@@ -1,23 +1,27 @@
 import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CartProduct from '../components/ui/CartProduct';
 import AuthContext from '../context/AuthContext';
 import CartContext from '../context/CartContext';
+import toDecimal from '../util/toDecimal';
 
 function Cart() {
-  const { getCartFromLocalStorage, cart, cartTotal } = useContext(CartContext);
+  const { cart, cartTotal } = useContext(CartContext);
   const { user } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   getCartFromLocalStorage();
-  // }, []);
+  const navigate = useNavigate();
 
-  console.log(cart);
+  useEffect(() => {
+    if (!user) {
+      navigate('/auth');
+    }
+  });
 
   const orderHandler = () => {};
 
   return (
     <>
-      {cart.length > 0 ? (
+      {cart.length > 0 && user ? (
         <>
           {/* Cart items */}
           <section className='flex flex-col lg:flex-row gap-20'>
@@ -27,7 +31,7 @@ function Cart() {
               })}
             </div>
             <div>
-              <p>total: &euro; {cartTotal}</p>
+              <p>total: &euro; {toDecimal(cartTotal)}</p>
             </div>
           </section>
 

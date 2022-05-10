@@ -3,9 +3,10 @@ import server from '../../util/server';
 import { FiEdit3 } from 'react-icons/fi';
 import ProductContext from '../../context/ProductContext';
 import Modal from '../Modal';
+import toDecimal from '../../util/toDecimal';
 
 function ProductSingle({ product }) {
-  const { getProducts, updateProduct } = useContext(ProductContext);
+  const { updateProduct } = useContext(ProductContext);
 
   const [name, setName] = useState(product.name);
   const [description, setDescription] = useState(product.description);
@@ -41,13 +42,6 @@ function ProductSingle({ product }) {
       quantity
     );
 
-    // getProducts();
-
-    // setName('');
-    // setDescription('');
-    // setQuantity('');
-    // setPrice('');
-
     setProductUpdatedMessage(true);
   };
 
@@ -61,7 +55,7 @@ function ProductSingle({ product }) {
       <p>{product.name}</p>
       <div className='flex gap-4 items-center'>
         <p>Quantity: {product.quantity}</p>
-        <p>Price: &euro; {product.price}</p>
+        <p>Price: &euro; {toDecimal(product.price)}</p>
 
         {/* Modal for updating product */}
         <Modal

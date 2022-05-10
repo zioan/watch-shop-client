@@ -1,7 +1,5 @@
 import { useContext, useState } from 'react';
-import ImageContext from '../../context/ImageContext';
 import ProductContext from '../../context/ProductContext';
-import server from '../../util/server';
 import NewImage from './NewImage';
 import MediaGalley from './MediaGalley';
 
@@ -17,7 +15,6 @@ function NewProductTemplate() {
   const [error, setError] = useState('');
 
   const { createProduct } = useContext(ProductContext);
-  const { images } = useContext(ImageContext);
 
   const newProductHandler = (e) => {
     e.preventDefault();

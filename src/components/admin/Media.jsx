@@ -1,6 +1,5 @@
 import { useContext, useEffect } from 'react';
 import ImageContext from '../../context/ImageContext';
-import server from '../../util/server';
 import MediaGalley from './MediaGalley';
 import NewImage from './NewImage';
 

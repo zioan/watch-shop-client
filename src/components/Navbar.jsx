@@ -6,6 +6,7 @@ import { FaBars } from 'react-icons/fa';
 import AuthContext from '../context/AuthContext';
 import UserContext from '../context/UserContext';
 import CartContext from '../context/CartContext';
+import toDecimal from '../util/toDecimal';
 
 function Navbar() {
   const [togglerResponsiveNav, setTogglerResponsiveNav] = useState(false);
@@ -113,7 +114,13 @@ function Navbar() {
                 ) : (
                   <span className='font-bold text-lg'>Your cart is empty</span>
                 )}
-                <span className='text-info'>Total: &euro; {cartTotal}</span>
+                {cartTotal > 0 ? (
+                  <span className='text-info'>
+                    Total: &euro; {toDecimal(cartTotal)}
+                  </span>
+                ) : (
+                  ''
+                )}
                 <div className='card-actions'>
                   <Link to='/cart' className='btn btn-primary btn-block'>
                     View cart

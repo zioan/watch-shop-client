@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import server from '../../util/server';
 import { BiUpArrow, BiDownArrow, BiTrash } from 'react-icons/bi';
 import CartContext from '../../context/CartContext';
+import toDecimal from '../../util/toDecimal';
 
 function CartProduct({ product }) {
   const [quantity, setQuantity] = useState(product.ordered_quantity);
@@ -43,7 +44,7 @@ function CartProduct({ product }) {
         <p className=' '>{product.name}</p>
       </div>
       <div className=' flex gap-8 items-center justify-between md:w-[400px]'>
-        <p>Price: &euro; {product.price}</p>
+        <p>Price: &euro; {toDecimal(product.price)}</p>
 
         {/* quantity selector */}
         <div className='flex gap-2 items-center'>
@@ -56,7 +57,7 @@ function CartProduct({ product }) {
             </span>
           </div>
         </div>
-        <p>Subtotal: &euro; {product.subtotal}</p>
+        <p>Subtotal: &euro; {toDecimal(product.subtotal)}</p>
         <button
           className=' text-xl'
           onClick={() => deleteProductFromCart(product.id)}
