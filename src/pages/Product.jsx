@@ -57,10 +57,10 @@ function Product() {
             <h2 className='text-2xl font-bold mb-8 mt-4 '>
               {singleProduct.name}
             </h2>
-            <h3 className='text-xl mb-4 '>
+            <h3 className='text-xl mb-4 font-bold text-right'>
               &euro; {toDecimal(singleProduct.price)}
             </h3>
-            <p className='text-xl mb-4'>{singleProduct.description}</p>
+            <p className='text-xl mb-10'>{singleProduct.description}</p>
             <div className='divider'>
               <button className='btn text-lg' onClick={addToCartHandler}>
                 <svg

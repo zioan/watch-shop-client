@@ -4,10 +4,12 @@ import CartProduct from '../components/ui/CartProduct';
 import AuthContext from '../context/AuthContext';
 import CartContext from '../context/CartContext';
 import OrderContext from '../context/OrderContext';
+import ProductContext from '../context/ProductContext';
 import toDecimal from '../util/toDecimal';
 
 function Cart() {
   const { user } = useContext(AuthContext);
+  const { products, updateProductQuantity } = useContext(ProductContext);
   const { cart, cartTotal, emptyCartOnOrderSubmit } = useContext(CartContext);
   const { createOrder } = useContext(OrderContext);
 
@@ -23,7 +25,20 @@ function Cart() {
     const orderData = JSON.stringify(cart);
     console.log(orderData);
     createOrder(orderData, cartTotal);
+    updateProductsQuantity();
     emptyCartOnOrderSubmit();
+  };
+
+  const updateProductsQuantity = () => {
+    for (let i = 0; i < products.length; i++) {
+      for (let i = 0; i < cart.length; i++) {
+        if (products[i].id === cart[i].id) {
+          const updatedQuantity =
+            products[i].quantity - cart[i].ordered_quantity;
+          updateProductQuantity(products[i].id, updatedQuantity);
+        }
+      }
+    }
   };
 
   return (

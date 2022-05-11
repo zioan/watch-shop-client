@@ -75,6 +75,12 @@ export const ProductProvider = ({ children }) => {
     getProducts();
   };
 
+  const updateProductQuantity = async (id, quantity) => {
+    const updatedData = { quantity: quantity };
+    await axios.put(`${server}/products/quantity/${id}`, updatedData);
+    getProducts();
+  };
+
   const deleteProduct = (id) => {
     try {
       axios.delete(`${server}/products/delete/${id}`);
@@ -93,6 +99,7 @@ export const ProductProvider = ({ children }) => {
         getSingleProduct,
         createProduct,
         updateProduct,
+        updateProductQuantity,
         deleteProduct,
         error,
         loading,
