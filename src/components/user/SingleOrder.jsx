@@ -10,7 +10,7 @@ function SingleOrder({ order }) {
   }, []);
 
   return (
-    <>
+    <div className='border-2 p-1 md:p-4 my-2 md:my-6 border-base-200'>
       <h3>
         <span className='font-bold'>Order date: </span>
         {order.timeStamp.substring(8, 10)}.{order.timeStamp.substring(5, 7)}.
@@ -21,7 +21,7 @@ function SingleOrder({ order }) {
       {orderedItems.map((product) => {
         return (
           <div
-            className='flex flex-col md:flex-row p-2 md:p-0 md:pr-4  gap-4 items-center  justify-between border-2  '
+            className='flex flex-col md:flex-row p-2 md:p-0 md:pr-4 mb-2 gap-4 items-center  justify-between border-2  '
             key={product.id}
           >
             <div className='flex gap-6 items-center '>
@@ -48,15 +48,14 @@ function SingleOrder({ order }) {
         );
       })}
       <div className='flex justify-between mt-4 mb-8'>
-        <h3>
-          <span className='font-bold'>Order status: </span>
-          {order.status}
+        <h3 className='font-bold'>
+          Order status: {order.status.toUpperCase()}
         </h3>
         <p className='text-xl font-bold text-right  mr-6'>
           Total: &euro; {toDecimal(order.total)}
         </p>
       </div>
-    </>
+    </div>
   );
 }
 

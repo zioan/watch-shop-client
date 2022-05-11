@@ -9,9 +9,8 @@ function TabDashboard() {
 
   return (
     <>
-      <h2>TabDashboard</h2>
       <div className=' flex flex-col md:flex-row border-2 border-base-200 md:min-h-[500px] m-2'>
-        <div className=' md:max-w-xs md:mr-4 border-b-2 md:border-b-0 md:border-r-2 border-base-200 md:w-48'>
+        <div className=' md:max-w-xs border-b-2 md:border-b-0 md:border-r-2 border-base-200 md:w-48'>
           <ul className='flex flex-col gap-2'>
             <li
               onClick={() => setActiveTab('tab5')}

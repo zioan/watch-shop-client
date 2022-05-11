@@ -30,7 +30,7 @@ function Menu() {
         >
           Credentials
         </li>
-        <li
+        {/* <li
           className={
             activeComponent === 'comp3'
               ? 'tab active-tab rounded-lg'
@@ -39,7 +39,7 @@ function Menu() {
           onClick={() => setActiveComponent('comp3')}
         >
           Payment methods
-        </li>
+        </li> */}
         <li
           className={
             activeComponent === 'comp4'

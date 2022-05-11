@@ -4,7 +4,7 @@ import UserContext from '../../context/UserContext';
 import server from '../../util/server';
 import toDecimal from '../../util/toDecimal';
 
-function SingleOrder({ order }) {
+function SingleOrderComponent({ order }) {
   const [orderedItems, setOrderedItem] = useState([]);
   const { getCustomerDetails, customerDetails } = useContext(UserContext);
   const { updateOrderStatus } = useContext(OrderContext);
@@ -19,7 +19,7 @@ function SingleOrder({ order }) {
   };
 
   return (
-    <>
+    <div className=' border-2 p-1 md:p-4 my-2 md:my-6 border-base-200'>
       <h3>
         <span className='font-bold'>Order date: </span>
         {order.timeStamp.substring(8, 10)}.{order.timeStamp.substring(5, 7)}.
@@ -30,7 +30,7 @@ function SingleOrder({ order }) {
       {orderedItems.map((product) => {
         return (
           <div
-            className='flex flex-col md:flex-row p-2 md:p-0 md:pr-4  gap-4 items-center  justify-between border-2  '
+            className='flex flex-col md:flex-row p-2 md:p-0 md:pr-4 mb-2 gap-4 items-center  justify-between border-2  '
             key={product.id}
           >
             <div className='flex gap-6 items-center '>
@@ -57,9 +57,8 @@ function SingleOrder({ order }) {
         );
       })}
       <div className='flex justify-between mt-4 mb-8'>
-        <h3>
-          <span className='font-bold'>Order status: </span>
-          {order.status}
+        <h3 className='font-bold'>
+          Order status: {order.status.toUpperCase()}
         </h3>
         <p className='text-xl font-bold text-right  mr-6'>
           Total: &euro; {toDecimal(order.total)}
@@ -78,13 +77,15 @@ function SingleOrder({ order }) {
             <span className='font-bold'>{customerDetails.address}</span>
           </h3>
           <h3>Delivery in ca. 3 working days</h3>
-          <button className=' btn my-4' onClick={orderStatusHandler}>
-            Mark as delivered
-          </button>
+          {order.status === 'pending' && (
+            <button className=' btn my-4' onClick={orderStatusHandler}>
+              Mark as delivered
+            </button>
+          )}
         </section>
       )}
-    </>
+    </div>
   );
 }
 
-export default SingleOrder;
+export default SingleOrderComponent;
