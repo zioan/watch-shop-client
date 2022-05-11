@@ -31,10 +31,10 @@ function Cart() {
 
   const updateProductsQuantity = () => {
     for (let i = 0; i < products.length; i++) {
-      for (let i = 0; i < cart.length; i++) {
-        if (products[i].id === cart[i].id) {
+      for (let j = 0; j < cart.length; j++) {
+        if (products[i].id === cart[j].id) {
           const updatedQuantity =
-            products[i].quantity - cart[i].ordered_quantity;
+            products[i].quantity - cart[j].ordered_quantity;
           updateProductQuantity(products[i].id, updatedQuantity);
         }
       }
