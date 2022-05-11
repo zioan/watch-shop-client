@@ -6,11 +6,15 @@ function Orders() {
   const [pendingOrders, setPendingOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState([]);
   const [activeTab, setActiveTab] = useState('tab1');
-  const { allOrders } = useContext(OrderContext);
+  const { getAllOrders, allOrders } = useContext(OrderContext);
 
   useEffect(() => {
     filterOrdersByStatus();
   }, [allOrders]);
+
+  useEffect(() => {
+    getAllOrders();
+  }, []);
 
   const filterOrdersByStatus = () => {
     setPendingOrders([]);

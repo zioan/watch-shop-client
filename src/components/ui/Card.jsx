@@ -23,9 +23,9 @@ function Card({ product }) {
   };
 
   return (
-    <div className=' relative mx-2 md:m-0'>
+    <>
       {product.quantity > 0 && (
-        <>
+        <div className=' relative mx-2 md:m-0'>
           <div className='relative overflow-hidden shadow-md rounded-md h-full '>
             <img
               className='relative object-cover w-full h-full  cursor-pointer hover:scale-110 transition duration-300 ease-in-out'
@@ -60,9 +60,9 @@ function Card({ product }) {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 

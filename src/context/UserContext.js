@@ -7,7 +7,6 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [error, setError] = useState('');
-  const [customerDetails, setCustomerDetails] = useState(null);
   const { user, getUser } = useContext(AuthContext);
 
   const login = async (email, password) => {
@@ -101,17 +100,6 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const getCustomerDetails = async (id) => {
-    setCustomerDetails(null);
-    try {
-      const customerRes = await axios.get(`${server}/users/find/${id}`);
-      setCustomerDetails(customerRes.data[0]);
-      console.log(customerRes.data[0]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <UserContext.Provider
       value={{
@@ -121,8 +109,6 @@ export const UserProvider = ({ children }) => {
         updateUserProfile,
         updateUserEmail,
         updateUserPassword,
-        getCustomerDetails,
-        customerDetails,
         error,
       }}
     >

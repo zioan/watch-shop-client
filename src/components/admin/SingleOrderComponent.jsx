@@ -1,12 +1,12 @@
+import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import OrderContext from '../../context/OrderContext';
-import UserContext from '../../context/UserContext';
 import server from '../../util/server';
 import toDecimal from '../../util/toDecimal';
 
 function SingleOrderComponent({ order }) {
   const [orderedItems, setOrderedItem] = useState([]);
-  const { getCustomerDetails, customerDetails } = useContext(UserContext);
+  const [customerDetails, setCustomerDetails] = useState(null);
   const { updateOrderStatus } = useContext(OrderContext);
 
   useEffect(() => {
@@ -16,6 +16,16 @@ function SingleOrderComponent({ order }) {
 
   const orderStatusHandler = () => {
     updateOrderStatus(order.id, 'delivered');
+  };
+
+  const getCustomerDetails = async (id) => {
+    setCustomerDetails(null);
+    try {
+      const customerRes = await axios.get(`${server}/users/find/${id}`);
+      setCustomerDetails(customerRes.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
