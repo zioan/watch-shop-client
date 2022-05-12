@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Auth from './pages/Auth';
 import Admin from './pages/Admin';
+import About from './pages/About';
 import Contact from './pages/Contact';
 import UserProfile from './pages/UserProfile';
 import Product from './pages/Product';
@@ -33,6 +34,7 @@ function App() {
             <Route path='/cart' element={<Cart />} />
             <Route path='/profile' element={<UserProfile />} />
             <Route path='/admin' element={<Admin />} />
+            <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/notfound' element={<NotFound />} />
             <Route path='/*' element={<NotFound />} />
