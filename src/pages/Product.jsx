@@ -29,7 +29,6 @@ function Product() {
     // comparing id 'number' with params 'string' is right in this case !!!
     for (let i = 0; i < products.length; i++) {
       if (products[i].id == params.product_id) {
-        console.log(products[i]);
         addToCart(products[i]);
       }
     }

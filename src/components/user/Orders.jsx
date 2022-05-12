@@ -11,7 +11,7 @@ function Orders() {
 
   return (
     <>
-      <h2 className='text-center text-2xl mb-6'>Orders</h2>
+      <h2 className='text-center text-2xl mb-6'>My Orders</h2>
       {userOrders.map((order) => {
         return <SingleOrder key={order.id} order={order} />;
       })}

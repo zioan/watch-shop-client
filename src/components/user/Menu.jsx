@@ -5,7 +5,7 @@ import Orders from './Orders';
 import Profile from './Profile';
 
 function Menu() {
-  const [activeComponent, setActiveComponent] = useState('comp0');
+  const [activeComponent, setActiveComponent] = useState('comp1');
   const { user } = useContext(AuthContext);
   return (
     <>

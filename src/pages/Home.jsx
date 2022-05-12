@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import Card from '../components/ui/Card';
+import HomeHeader from '../components/ui/HomeHeader';
 import Spinner from '../components/ui/Spinner';
 import ProductContext from '../context/ProductContext';
 
@@ -18,6 +19,7 @@ function Home() {
 
   return (
     <>
+      <HomeHeader />
       {loading && loadingProduct()}
       <section className=' grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
         {products.map((product) => {

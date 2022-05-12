@@ -17,7 +17,6 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     if (cart.includes(product)) {
-      console.log('product already in cart');
       return;
     }
 
@@ -27,7 +26,6 @@ export const CartProvider = ({ children }) => {
   const updateProductQuantityAndSubtotal = (id, quantity) => {
     cart.filter((product) => {
       if (product.id === id) {
-        console.log(cart);
         product.ordered_quantity = quantity;
         product.subtotal = product.price * quantity;
       }

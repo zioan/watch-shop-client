@@ -23,7 +23,6 @@ function Cart() {
 
   const orderHandler = () => {
     const orderData = JSON.stringify(cart);
-    console.log(orderData);
     createOrder(orderData, cartTotal);
     updateProductsQuantity();
     emptyCartOnOrderSubmit();

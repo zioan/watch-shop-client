@@ -47,7 +47,6 @@ export const ImageProvider = ({ children }) => {
   const uploadImage = async (formData) => {
     try {
       const res = await axios.post(`${server}/images/upload`, formData);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
       return;

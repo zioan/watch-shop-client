@@ -29,7 +29,6 @@ export const OrderProvider = ({ children }) => {
       setError('');
     } catch (error) {
       setError(error.response.data);
-      console.log(error.response.data);
     }
   };
 
@@ -47,7 +46,6 @@ export const OrderProvider = ({ children }) => {
       setError('');
     } catch (error) {
       setError(error.response.data);
-      console.log(error.response.data);
     }
   };
 
@@ -58,7 +56,6 @@ export const OrderProvider = ({ children }) => {
       order_data: cart,
       total: cartTotal,
     };
-    console.log(orderData);
     try {
       await axios.post(`${server}/orders/add`, orderData);
 
@@ -66,7 +63,6 @@ export const OrderProvider = ({ children }) => {
       getUserOrders();
     } catch (error) {
       setError(error.response.data);
-      console.log(error.response.data);
     }
   };
 
@@ -78,7 +74,6 @@ export const OrderProvider = ({ children }) => {
       getUserOrders();
     } catch (error) {
       setError(error.response.data);
-      console.log(error.response.data);
     }
   };
 

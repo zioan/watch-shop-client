@@ -19,7 +19,6 @@ function Card({ product }) {
 
   const addToCartHandler = () => {
     addToCart(product);
-    console.log('product from cart: ', product);
   };
 
   return (

@@ -30,7 +30,6 @@ export const ProductProvider = ({ children }) => {
       const singleProduct = await axios.get(`${server}/products/${id}`);
       if (singleProduct.data.length > 0) {
         setSingleProduct(singleProduct.data[0]);
-        console.log(singleProduct.data[0]);
         setLoading(false);
       } else {
         setSingleProduct(null);

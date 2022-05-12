@@ -5,7 +5,7 @@ import Orders from './Orders';
 import Products from './Products';
 
 function TabDashboard() {
-  const [activeTab, setActiveTab] = useState('tab0');
+  const [activeTab, setActiveTab] = useState('tab5');
 
   return (
     <>
