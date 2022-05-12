@@ -45,14 +45,14 @@ function Product() {
       {/* if product is found */}
       {singleProduct && (
         <div className='flex flex-col md:flex-row gap-6 md:gap-10 mb-10'>
-          <section>
+          <section className='flex-grow'>
             <img
               className='relative object-cover w-full max-h-[600px] p-4 md:m-4 shadow-xl'
               src={`${server}/files/${singleProduct.image}`}
               alt={singleProduct.image}
             />
           </section>
-          <section className=' flex-grow m-4'>
+          <section className=' md:w-1/2 m-4'>
             <h2 className='text-2xl font-bold mb-8 mt-4 '>
               {singleProduct.name}
             </h2>

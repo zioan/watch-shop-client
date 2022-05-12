@@ -51,7 +51,7 @@ function SingleOrderComponent({ order }) {
               />
               <p className=' '>{product.name}</p>
             </div>
-            <div className=' flex gap-8 items-center justify-between md:w-[400px]'>
+            <div className=' flex flex-col md:flex-row gap-8 items-center justify-between md:w-[600px]'>
               <p>Price: &euro; {toDecimal(product.price)}</p>
 
               {/* quantity selector */}

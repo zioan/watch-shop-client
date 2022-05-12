@@ -54,6 +54,7 @@ function ProductSingle({ product }) {
 
   return (
     <div className='flex flex-col md:flex-row p-2 md:p-0 md:pr-4 justify-between gap-4 items-center border-2  '>
+      {/* <div className=' flex flex-col md:flex-row gap-8 items-center justify-between md:w-[600px]'> */}
       <img
         className=' object-cover w-16 h-16 '
         src={`${server}/files/${product.image}`}

@@ -41,43 +41,45 @@ function Cart() {
   };
 
   return (
-    <>
+    <div className='mx-2'>
       {cart.length > 0 && user ? (
         <>
           {/* Cart items */}
-          <section className='flex flex-col lg:flex-row gap-20'>
-            <div className='flex-1'>
-              {cart.map((product) => {
-                return <CartProduct key={product.id} product={product} />;
-              })}
-            </div>
-            <div>
-              <p>total: &euro; {toDecimal(cartTotal)}</p>
-            </div>
+          <section>
+            {cart.map((product) => {
+              return <CartProduct key={product.id} product={product} />;
+            })}
           </section>
 
           {/* Order details (user details) */}
-          <section className=' my-6'>
-            <h3>
-              Delivery to:{' '}
-              <span className='font-bold'>
-                {user.name} {user.surname}
-              </span>
-            </h3>
-            <h3>
-              Delivery Address:{' '}
-              <span className='font-bold'>{user.address}</span>
-            </h3>
-            <h3>Delivery in ca. 3 working days</h3>
-            <button className=' btn my-4' onClick={orderHandler}>
-              Place Order
-            </button>
+          <section className=' my-6 flex flex-col lg:flex-row justify-between'>
+            <div>
+              <h3>
+                Delivery to:{' '}
+                <span className='font-bold'>
+                  {user.name} {user.surname}
+                </span>
+              </h3>
+              <h3>
+                Delivery Address:{' '}
+                <span className='font-bold'>{user.address}</span>
+              </h3>
+              <h3>Delivery in ca. 3 working days</h3>
+            </div>
+            <div>
+              <p className=' text-xl font-bold mr-4 mt-4 md:mt-0'>
+                Total: &euro; {toDecimal(cartTotal)}
+              </p>
+              <button className=' btn my-4' onClick={orderHandler}>
+                Place Order
+              </button>
+            </div>
           </section>
         </>
       ) : (
         <p>Your cart is empty</p>
       )}
-    </>
+    </div>
   );
 }
 

@@ -34,16 +34,16 @@ function CartProduct({ product }) {
   };
 
   return (
-    <div className='flex flex-col md:flex-row p-2 md:p-0 md:pr-4  gap-4 items-center  justify-between border-2  '>
+    <div className='flex flex-col md:flex-row p-2 md:p-0 md:pr-4 mb-2  gap-4 items-center  justify-between border-2  '>
       <div className='flex gap-6 items-center '>
         <img
-          className=' object-cover w-16 h-16 '
+          className=' object-cover w-28 h-28 '
           src={`${server}/files/${product.image}`}
           alt={product.image}
         />
         <p className=' '>{product.name}</p>
       </div>
-      <div className=' flex gap-8 items-center justify-between md:w-[400px]'>
+      <div className=' flex flex-col md:flex-row gap-8 items-center justify-between md:w-[600px]'>
         <p>Price: &euro; {toDecimal(product.price)}</p>
 
         {/* quantity selector */}

@@ -151,15 +151,15 @@ function Navbar() {
                 tabIndex='0'
                 className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-32'
               >
-                <li>
+                <li className='mb-1'>
                   <Link to='/profile'>Profile</Link>
                 </li>
                 {user.admin === 1 && (
-                  <li>
+                  <li className='mb-1'>
                     <Link to='/admin'>Admin Panel</Link>
                   </li>
                 )}
-                <li>
+                <li className='mb-1'>
                   <button onClick={logoutHandler}>Logout</button>
                 </li>
               </ul>
