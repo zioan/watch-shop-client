@@ -14,7 +14,9 @@ export const OrderProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    getAllOrders();
+    if (user) {
+      getAllOrders();
+    }
     // getUserOrders();
   }, []);
 

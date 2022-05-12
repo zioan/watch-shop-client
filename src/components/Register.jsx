@@ -205,11 +205,6 @@ function Register() {
             </div>
           </div>
         </div>
-        {/* <div className='form-control my-6 mx-auto max-w-[200px]'>
-          <button type='submit' className='btn btn-primary'>
-            Register
-          </button>
-        </div> */}
       </form>
     </div>
   );

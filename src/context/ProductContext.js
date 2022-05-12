@@ -70,9 +70,13 @@ export const ProductProvider = ({ children }) => {
     price,
     quantity
   ) => {
-    const updatedData = { name, image, description, price, quantity };
-    await axios.put(`${server}/products/update/${id}`, updatedData);
-    getProducts();
+    try {
+      const updatedData = { name, image, description, price, quantity };
+      await axios.put(`${server}/products/update/${id}`, updatedData);
+      getProducts();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const updateProductQuantity = async (id, quantity) => {

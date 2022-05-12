@@ -19,8 +19,6 @@ function Profile() {
   const [zipCode, setZipCode] = useState('');
   const [country, setCountry] = useState('');
 
-  console.log(user);
-
   useEffect(() => {
     if (!user) {
       navigate('/');
