@@ -35,7 +35,7 @@ function App() {
             <Route path='/profile' element={<UserProfile />} />
             <Route path='/admin' element={<Admin />} />
             <Route path='/about' element={<About />} />
-            <Route path='/contact' element={<Contact />} />
+            {/* <Route path='/contact' element={<Contact />} /> */}
             <Route path='/notfound' element={<NotFound />} />
             <Route path='/*' element={<NotFound />} />
           </Routes>

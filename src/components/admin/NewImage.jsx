@@ -30,7 +30,10 @@ function NewImage({ setImageNameHandler }) {
         </label>
         <input type='file' onChange={saveFile} className='my-2' />
       </div>
-      <button className='btn' onClick={uploadFile}>
+      <button
+        className={file ? 'btn' : 'btn btn-disabled'}
+        onClick={uploadFile}
+      >
         Upload
       </button>
     </>

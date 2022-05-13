@@ -26,7 +26,6 @@ function Media() {
       <h2 className=' mt-4 mb-6 text-2xl text-center font-bold'>
         Media gallery
       </h2>
-      <p className='mb-2 text-2xl'>Upload new image.</p>
       <NewImage />
       <div className='divider text-xl my-6'>Click an image to delete</div>
       <p className='mb-2 text-2xl text-red-600'>

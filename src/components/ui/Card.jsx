@@ -36,9 +36,14 @@ function Card({ product }) {
 
           <div className='absolute bottom-0 left-0 w-full text-heading-colo  bg-base-200 p-4'>
             <div className=' flex justify-between items-center'>
-              <h3 className=' text-xl '>{product.name}</h3>
+              <h3
+                className=' text-xl cursor-pointer'
+                onClick={productPageHandler}
+              >
+                {product.name}
+              </h3>
               <div>
-                <p className=' text-2xl inline'>
+                <p className=' text-2xl inline cursor-default'>
                   &euro; {toDecimal(product.price)}
                 </p>
                 <svg

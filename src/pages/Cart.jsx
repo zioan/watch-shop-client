@@ -41,7 +41,7 @@ function Cart() {
   };
 
   return (
-    <div className='mx-2'>
+    <div className='mx-2 mt-20'>
       {cart.length > 0 && user ? (
         <>
           {/* Cart items */}
