@@ -7,14 +7,14 @@ const AuthContext = createContext();
 function AuthProvider(props) {
   const [user, setUser] = useState(undefined);
 
+  useEffect(() => {
+    getUser();
+  }, []);
+
   async function getUser() {
     const userRes = await axios.get(`${server}/users/loggedin`);
     setUser(userRes.data);
   }
-
-  useEffect(() => {
-    getUser();
-  }, []);
 
   return (
     <AuthContext.Provider value={{ user, getUser }}>

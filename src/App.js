@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import Auth from './pages/Auth';
 import Admin from './pages/Admin';
 import About from './pages/About';
-import Contact from './pages/Contact';
 import UserProfile from './pages/UserProfile';
 import Product from './pages/Product';
 import NotFound from './pages/NotFound';

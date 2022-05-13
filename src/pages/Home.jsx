@@ -21,7 +21,7 @@ function Home() {
     <>
       <HomeHeader />
       {loading && loadingProduct()}
-      <section className=' grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
+      <section className=' grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mx-2'>
         {products.map((product) => {
           return <Card key={product.id} product={product} />;
         })}

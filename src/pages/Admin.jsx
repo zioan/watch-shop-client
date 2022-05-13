@@ -6,7 +6,7 @@ import ProductContext from '../context/ProductContext';
 
 function Admin() {
   const { user } = useContext(AuthContext);
-  const { products, createProduct } = useContext(ProductContext);
+  // const { products, createProduct } = useContext(ProductContext);
   const navigate = useNavigate();
 
   // If no user or user is no admin redirect to home page
